@@ -180,6 +180,13 @@ export default function EditLearningContent({ params }: Props) {
                     value={learningContent.content}
                     onChange={(value) => handleChange("content", value)}
                     options={{
+                      spellChecker: false,
+                      autofocus: true,
+                      autosave: {
+                        enabled: true,
+                        uniqueId: "editLearningContent",
+                        delay: 1000,
+                      },
                       toolbar: [
                         "bold",
                         "italic",

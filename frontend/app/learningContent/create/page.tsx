@@ -205,6 +205,13 @@ export default function CreateLearningContent() {
                         setNewContent({ ...newContent, content: value })
                       }
                       options={{
+                        spellChecker: false,
+                        autofocus: true,
+                        autosave: {
+                          enabled: true,
+                          uniqueId: "createLearningContent",
+                          delay: 1000,
+                        },
                         toolbar: [
                           "bold",
                           "italic",
