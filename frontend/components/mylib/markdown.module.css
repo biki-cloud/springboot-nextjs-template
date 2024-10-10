@@ -119,8 +119,16 @@
     content: ' • ';
 }
 
+.markdown ol {
+    counter-reset: item;
+}
+
+.markdown ol>li {
+    counter-increment: item;
+}
+
 .markdown ol>li::marker {
-    font-weight: bold;
+    content: counter(item) ". ";
 }
 
 .markdown table {
