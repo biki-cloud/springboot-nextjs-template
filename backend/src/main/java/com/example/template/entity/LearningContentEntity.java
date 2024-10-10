@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import lombok.Data;
 import jakarta.persistence.ManyToOne;
+import java.time.ZoneId;
 import jakarta.persistence.JoinColumn;
 import java.time.LocalDate;
 
@@ -59,47 +60,47 @@ public class LearningContentEntity {
 
     // Method to handle correct answer
     public void correctAnswer() {
-        correctCount++;
-        reviewCount++;
+        this.correctCount++;
+        this.reviewCount++;
         
         // レベルアップの条件を厳しくする
         if (correctCount % 5 == 0) { // 5回正解するごとにレベルアップ
-            level = Math.min(level + 1, 5); // Increase level (max 3)
+            this.level = Math.min(level + 1, 5); // Increase level (max 3)
         }
         
-        lastReviewedDate = LocalDate.now();
-        nextReviewDate = calculateNextReviewDate();
+        this.lastReviewedDate = LocalDate.now(ZoneId.of("Asia/Tokyo"));
+        this.nextReviewDate = calculateNextReviewDate();
     }
 
     // Method to handle incorrect answer
     public void incorrectAnswer() {
-        incorrectCount++;
-        reviewCount++;
+        this.incorrectCount++;
+        this.reviewCount++;
         
         // レベルダウンの条件を厳しくする
         if (incorrectCount % 3 == 0) { // 3回不正解するごとにレベルダウン
-            level = Math.max(level - 1, 1); // Decrease level (min 1)
+            this.level = Math.max(level - 1, 1); // Decrease level (min 1)
         }
         
-        lastReviewedDate = LocalDate.now();
-        nextReviewDate = calculateNextReviewDate();
+        this.lastReviewedDate = LocalDate.now(ZoneId.of("Asia/Tokyo"));
+        this.nextReviewDate = calculateNextReviewDate();
     }
 
     // Method to calculate next review date
     private LocalDate calculateNextReviewDate() {
-        switch (level) {
+        switch (this.level) {
             case 1:
-                return LocalDate.now().plusDays(1); // Next day
+                return LocalDate.now(ZoneId.of("Asia/Tokyo")).plusDays(1); // Next day
             case 2:
-                return LocalDate.now().plusDays(3); // 3 days later
+                return LocalDate.now(ZoneId.of("Asia/Tokyo")).plusDays(3); // 3 days later
             case 3:
-                return LocalDate.now().plusWeeks(1); // 1 week later
+                return LocalDate.now(ZoneId.of("Asia/Tokyo")).plusWeeks(1); // 1 week later
             case 4:
-                return LocalDate.now().plusWeeks(3); // 3 weeks later
+                return LocalDate.now(ZoneId.of("Asia/Tokyo")).plusWeeks(3); // 3 weeks later
             case 5:
-                return LocalDate.now().plusWeeks(5); // 5 weeks later
+                return LocalDate.now(ZoneId.of("Asia/Tokyo")).plusWeeks(5); // 5 weeks later
             default:
-                return null;
+                return LocalDate.now(ZoneId.of("Asia/Tokyo")).plusWeeks(5);
         }
     }
 
