@@ -103,10 +103,24 @@
 .markdown ol {
     margin-left: 1.5em;
     margin-bottom: 1.5em;
+    list-style-position: outside;
 }
 
 .markdown li {
     margin-bottom: 0.5em;
+    position: relative;
+}
+
+.markdown li::marker {
+    color: black;
+}
+
+.markdown ul>li::marker {
+    content: ' • ';
+}
+
+.markdown ol>li::marker {
+    font-weight: bold;
 }
 
 .markdown table {
