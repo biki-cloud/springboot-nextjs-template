@@ -33,6 +33,18 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   loading: () => <p>エディターを読み込み中...</p>,
 });
 
+const customToolbarButton = {
+  name: "custom-details",
+  action: (editor: any) => {
+    const cm = editor.codemirror;
+    const output = "<details>\n<summary>\nsummary\n</summary>\n\n\n</details>";
+    const cursor = cm.getCursor();
+    cm.replaceRange(output, cursor);
+  },
+  className: "fa fa-plus-square",
+  title: "Insert Details",
+};
+
 interface Props {
   params: {
     id: string;
@@ -167,6 +179,31 @@ export default function EditLearningContent({ params }: Props) {
                   <SimpleMDE
                     value={learningContent.content}
                     onChange={(value) => handleChange("content", value)}
+                    options={{
+                      toolbar: [
+                        "bold",
+                        "italic",
+                        "heading",
+                        "|",
+                        "quote",
+                        "unordered-list",
+                        "ordered-list",
+                        "|",
+                        "link",
+                        "image",
+                        "|",
+                        "preview",
+                        "side-by-side",
+                        "fullscreen",
+                        "|",
+                        {
+                          name: "custom-details",
+                          action: customToolbarButton.action,
+                          className: customToolbarButton.className,
+                          title: customToolbarButton.title,
+                        },
+                      ],
+                    }}
                     events={{ drop: handleDrop }}
                   />
                 </TabsContent>
